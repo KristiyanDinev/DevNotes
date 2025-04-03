@@ -1,0 +1,38 @@
+Let's say that we have a class that solves a specific problem.
+Let's just say it is a database class that handles the execution of the queries.
+Then we have a service class which handles the usage of the database class to do 
+what it is designed to do.
+Now we come to the conclusion that either the service class will build the actual query string 
+to be executed by the database or the database will require the params, 
+so it can execute the builded query, which will be build in the database class.
+Now good query builders will make it possible that you can build a query string with all kinds of settings
+and then use that string where you need it.
+Keep in mind that it is a good practice not to write embeded (into the source code directly) strings that
+represent sql queries.
+Because we need to write an adaptable application, and so if the company changes their sql server, then you
+will have to rewrite maybe almost all of the queries and make a whole new release, while if the queries where
+automaticly builded or were in a config file, then you wouldn't have to worry about rewriting the queries again.
+When the company has a product that needs to change the database for some random reason, then you will have to
+be ready to act upon it fast. If the company loses reputation or money or something else, just because of that 
+slow database migration. Then guess what. You may have to look for another job, but there is still hope.
+Ok. What is such a tool that can build automaticly the correct query for the database that we use?
+Good question. I may know some query builders, but some of them requre a lot of code just to create a table or
+execute a register or a login query. Shouldn't the libraries and frameworks already have provided us a such
+query builder? Yes, but some of those are limited to customizations, and so if the company has a big complex
+database that has custom functionality, then you will find yourselves lacking on sql query builder features.
+I think as of now if you don't have a good sql query builder in your application that would support almost every
+feature of the sql provider (the database) and your application is not a hobby or just something small to work with 
+(without big plans for the future), then I think a custom sql builder will be nice. This is why I think a custom
+one will be better. It will meet your requirements and it may help someone else who is having the same problem. 
+It also can be used as a library which you may put as a dependency on your projects, but since it is a custom sql
+query builder. Not many developers will be familier with it, but as long as you keep the names simple and self-explained, 
+and put a good well-formatted documentation. I think it will be a piace of cake for the new developers. Like you can put
+already known terminology from sql, so when they write it to be self-explanatory.
+Because of this I was thinking to create an sql query builder for myself and use it in my projects. But this is kinda 
+selfish, so I may have to write it and make it in multiple programming languages, so that other platforms may take the 
+same advantage. But as of now I don't see any other way to make it easier for the developers to implement new features
+and to also cover the lack of features already in the sql query builder of the framework or library. But this means that
+there has to be maintainers of the custom sql query builder. But as long as you support the basic syntaix of the sql of that 
+database, then you don't really have to change any other thing. And please don't use custom regex for the sql query builders, 
+because there may be exceptions and with sql queries we need what we expect to get from the sql query and not a 
+deleted database or table by a sql injection.
