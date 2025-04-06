@@ -1,0 +1,8 @@
+JdbcOperations -> interface of the operations for the relational database in java.
+JdbcTemplate -> a class that implements the JdbcOperations to help with the database implementation in java.
+As an example of using prepared statements. (the parameters are used in a differed way)
+
+JdbcClient -> interface that provides parametrized statements.
+DefaultJdbcClient -> a class that implements JdbcClient.
+(In Spring Boot) that class uses `JdbcOperations` and `NamedParameterJdbcOperations` 
+(which I think is similar to `JdbcOperations`), but it does not implement them as `implements` keyword.
