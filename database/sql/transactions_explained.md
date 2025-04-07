@@ -1,6 +1,5 @@
-<pre>
+# Transactions
 
-<h2>Transactions</h2>
 A transaction is just a way to modify the database in a testing environment
 where you don't interact directly with the real database, but with a copy.
 
@@ -15,30 +14,28 @@ you may have to look up their configuration and documentation to enable this imp
 
 So you can either save the transaction or not.
 What you can do is: commits, rollbacks, save-points, cancel and etc.
-<ul>
-<li><b>Commit</b> is another term of "saving". You save your copy of the database (the transaction)
- to the real database. Then the transaction will be emptied.</li>
 
-<li><b>Rollback</b> is the action of undoing the sql queries in the transaction (not yet saved).</li>
-<li><b>Save Points</b> create a checkpoint in your transaction as your current state of the transaction.
+- **Commit** is another term of "saving". You save your copy of the database (the transaction)
+ to the real database. Then the transaction will be emptied.
+
+- **Rollback** is the action of undoing the sql queries in the transaction (not yet saved).
+- **Save Points** create a checkpoint in your transaction as your current state of the transaction.
 Let me give you an example:
-<pre>
+
 You make the following change in the database using transaction.    
-<i>UPDATE users SET username = 'Bob' WHERE id = 1;</i>
+*UPDATE users SET username = 'Bob' WHERE id = 1;*
 
 Then you save that point in your transaction.
 After that you execute another SQL query.
-<i>INSERT INTO users (username) VALUES ('John');</i>
+*INSERT INTO users (username) VALUES ('John');*
 
 But then you get an error in your code and you decide to rollback your query.
 So you rollback and what is the state of the transaction?
-Now the transaction only has recorded the <i>UPDATE</i> query without
-the <i>INSERT</i> query.
-</li>
+Now the transaction only has recorded the *UPDATE* query without
+the *INSERT* query.
 
-<li><b>Cancel</b>: this cancels the whole transaction and any changes to the database in that transaction
-are not applied to the actual database.</li>
-</ul>
+- **Cancel**: this cancels the whole transaction and any changes to the database in that transaction
+are not applied to the actual database.
 
 As you can see that a transaction can handle a state of a database. 
 From a temporary state to applying the changes made to the database.
@@ -46,5 +43,3 @@ From a temporary state to applying the changes made to the database.
 Transactions are used when you have more then one query to execute, but I am not sure if that is the case
 with some frameworks. Another explanation can be that a single transaction is like a shadow of the original database,
  but when you commit your changes, then it becomes part of the original database.
-
-</pre>

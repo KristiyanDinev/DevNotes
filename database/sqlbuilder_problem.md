@@ -1,4 +1,4 @@
-<pre>
+# SQL Builder Problem
 Let's say that we have a class that solves a specific problem.
 Let's just say it is a database class that handles the execution of the queries.
 Then we have a service class which handles the usage of the database class to do
@@ -25,6 +25,7 @@ Execute a register or a login query. Shouldn't the libraries and frameworks alre
 Query builder? Yes, but some of those are limited to customizations, and so if the company has a big complex
 A database that has custom functionality, then you will find yourselves lacking SQL query builder features.
 
+# Solution
 I think as of now, if you don't have a good sql query builder in your application that would support almost every
 The features of the SQL provider (the database) and your application are not a hobby or just something small to work with.
 (without big plans for the future), then I think a custom SQL builder would be nice. This is why I think a custom
@@ -47,4 +48,3 @@ Deleted databases or tables by SQL injection.
 
 Now there are ways to implement custom features for the desired SQL query, but they may overcomplicated the project and may require more.
 Coding. Just that there may be a better and easier way, but with some trade-offs.
-</pre>
