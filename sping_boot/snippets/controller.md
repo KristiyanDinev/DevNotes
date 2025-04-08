@@ -92,3 +92,33 @@ mockMvc.perform(post("/login")
 .andExpect(status().isOk());
 ```
 
+## Keeping the Cookie for the next requests in MockMVC
+
+```java
+MvcResult mvcResult = mockMvc.perform(
+    get("/login")
+).andDo(
+    MockMvcResultHandlers.log()
+).andExpect(
+    status().isOk()
+).andReturn();
+
+Cookie sessionCookie = mvcResult.getResponse().getCookie("SESSION");
+
+LoginUserModel loginUserModel = new LoginUserModel("john2@example.com", "123");
+
+mockMvc.perform(post("/login")
+                .contentType(MediaType.APPLICATION_FORM_URLENCODED_VALUE)
+                .param("email", loginUserModel.email)
+                .param("password", loginUserModel.password)
+                .cookie(sessionCookie)
+                .accept(MediaType.ALL))
+.andDo(MockMvcResultHandlers.log())
+.andExpect(status().isOk());
+```
+
+I think by default MockMvc would keep the cookie for future request in the same testcase `@Test`.
+
+So that if the client gets `Set-Cookie`, then I think the `sessionCookie` may change as well, but
+
+if the test doesn't work, then you can update the cookie by yourself.
