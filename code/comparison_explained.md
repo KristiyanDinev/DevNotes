@@ -7,7 +7,7 @@ We will cover the comparison which is `String.compareTo(object)` in a **Java** o
 You can add custom comparison in both languages.
 Example:
 
-**Java:**
+**Java**
 ```java
 public class BankAccount {
     public int balance;
