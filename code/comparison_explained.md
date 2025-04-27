@@ -24,7 +24,8 @@ public class BankAccount {
         } else if (this.balance < anotherAccount.balance) {
             return -1;
 
-        } else if (this.balance > anotherAccount.balance) {
+        } else {
+            // else if (this.balance > anotherAccount.balance)
             return 1;
         }
     }
@@ -51,7 +52,8 @@ public class Temperature : IComparable
         } else if (this.temperatureF < obj.temperatureF) {
             return -1;
             
-        } else if (this.temperatureF > obj.temperatureF) {
+        } else {
+            // else if (this.balance > anotherAccount.balance)
             return 1;
         }
     }
