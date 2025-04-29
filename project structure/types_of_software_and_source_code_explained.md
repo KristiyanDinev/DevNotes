@@ -12,9 +12,9 @@ The exact opposite of **Open Source**
 
 Semi-free software is a type of software that you can use, copy, modify, and share with others for free, but you cannot see or change the code that makes it work. This software is only for non-profit purposes, which means you cannot make money from it.
 
-**Adobe Acrobat Reader** - a program used to view and print PDF files. It is free to download and use, but the source code is not available.
+- **Adobe Acrobat Reader** - a program used to view and print PDF files. It is free to download and use, but the source code is not available.
 
-**WinZip** - a program used to compress and decompress files. It is free to download and use, but the source code is not available.
+- **WinZip** - a program used to compress and decompress files. It is free to download and use, but the source code is not available.
 
 *See https://www.lsd.law/define/semi-free-software*
 

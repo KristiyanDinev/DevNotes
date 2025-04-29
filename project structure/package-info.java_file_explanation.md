@@ -30,16 +30,16 @@ Here in the `/* */` comments you can write out the **Javadoc**.
 
 You can continue with **annotations** that apply to the classes in that single package.
 
-**@NonNullApi** - Requires not null values for **parameters** and **return values**.
-
-**@NonNullFields** - Requires not null values for **fields** in a java class.
-
 The imports are for the **annotations'** sake.
 
-**@since** - In what version (when?) did this feature came to the project.
+- **@NonNullApi** - Requires not null values for **parameters** and **return values**.
 
-**@author** - Who created the package/project.
+- **@NonNullFields** - Requires not null values for **fields** in a java class.
 
-**@version** - Current version of that **Javadoc**.
+- **@since** - In what version (when?) did this feature came to the project.
+
+- **@author** - Who created the package/project.
+
+- **@version** - Current version of that **Javadoc**.
 
 *See https://www.baeldung.com/java-package-info*
