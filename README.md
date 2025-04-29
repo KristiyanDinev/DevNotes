@@ -25,5 +25,5 @@ definition. I am using IntelliJ IDEA, but it should be something similar to the 
 
 ### Good to know before reading
 - This mainly uses `Java` as a programming language for examples or explanations.
-- Not all of the explanation and examples are from me, but I have put cross-references and quotes from another peoples' answers.
+- Not all of the explanation and examples are from me, but I have put cross-references and quotes from another people or bots' answers.
 - Some of the problems in LeetCode are in `algorithms` folder with an interesting solution that may make you think out of the box.
