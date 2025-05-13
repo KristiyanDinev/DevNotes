@@ -32,3 +32,34 @@ ServiceModel - The service and for navigation a collection of permissions.
 
 -----
 
+
+
+## Dotnet EF (Entity Framework Core)
+
+Install globally
+
+```bash
+dotnet tool install --global dotnet-ef
+```
+
+Update
+
+```bash
+dotnet tool update --global dotnet-ef
+```
+
+Add the package
+
+```bash
+dotnet add package Microsoft.EntityFrameworkCore.Design
+```
+
+Verify
+
+```bash
+dotnet ef
+```
+
+
+*See https://learn.microsoft.com/en-us/ef/core/cli/dotnet*
+
