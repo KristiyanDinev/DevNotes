@@ -1,0 +1,100 @@
+name: Flutter iOS & macOS Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      build-mode:
+        description: 'Build mode'
+        required: true
+        default: 'debug'
+        type: choice
+        options:
+          - debug
+          - profile
+          - release
+      target-platform:
+        description: 'Target platform to build'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - ios
+          - macos
+          - all
+
+jobs:
+  build-ios:
+    name: Build iOS App
+    if: ${{ inputs.target-platform == 'ios' || inputs.target-platform == 'all' }}
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+          cache: true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Build iOS app
+        run: |
+          flutter build ios --${{ inputs.build-mode }} --no-codesign
+
+      - name: Package iOS app (Debug/Profile)
+        if: ${{ inputs.build-mode != 'release' }}
+        run: |
+          cd build/ios/iphoneos
+          mkdir -p Payload
+          cp -r Runner.app Payload
+          zip -r app.ipa Payload
+          rm -rf Payload
+
+      - name: Upload iOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-${{ inputs.build-mode }}-build
+          path: |
+            build/ios/iphoneos/*.ipa
+            build/ios/iphoneos/*.app
+
+  build-macos:
+    name: Build macOS App
+    if: ${{ inputs.target-platform == 'macos' || inputs.target-platform == 'all' }}
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '3.19.0'
+          channel: 'stable'
+          cache: true
+
+      - name: Install Flutter dependencies
+        run: flutter pub get
+
+      - name: Build macOS app
+        run: |
+          flutter config --enable-macos-desktop
+          flutter build macos --${{ inputs.build-mode }}
+
+      - name: Package macOS app
+        run: |
+          cd build/macos/Build/Products
+          MODE_DIR="${{ inputs.build-mode == 'debug' && 'Debug' || inputs.build-mode == 'profile' && 'Profile' || 'Release' }}"
+          zip -r macos-app.zip $MODE_DIR/*.app
+
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ inputs.build-mode }}-build
+          path: build/macos/Build/Products/*/*.app

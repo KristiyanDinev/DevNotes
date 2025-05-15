@@ -1,0 +1,139 @@
+name: React Native iOS & macOS Build
+
+on:
+  workflow_dispatch:
+    inputs:
+      configuration:
+        description: 'Build configuration'
+        required: true
+        default: 'Debug'
+        type: choice
+        options:
+          - Debug
+          - Release
+      target-platform:
+        description: 'Target platform to build'
+        required: true
+        default: 'all'
+        type: choice
+        options:
+          - ios
+          - macos
+          - all
+
+jobs:
+  build-ios:
+    name: Build iOS App
+    if: ${{ inputs.target-platform == 'ios' || inputs.target-platform == 'all' }}
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: '3.0'
+          working-directory: 'ios'
+
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+          cd ios && pod install
+
+      - name: Build iOS app
+        env:
+          CONFIGURATION: ${{ inputs.configuration }}
+        run: |
+          cd ios
+          xcodebuild -workspace $(ls -d *.xcworkspace | head -1) \
+                    -scheme $(ls -d *.xcodeproj | head -1 | sed 's/\.xcodeproj//') \
+                    -configuration $CONFIGURATION \
+                    -sdk iphoneos \
+                    -destination "generic/platform=iOS" \
+                    -archivePath build/App.xcarchive \
+                    clean archive
+
+      - name: Export IPA
+        if: ${{ inputs.configuration == 'Release' }}
+        run: |
+          cd ios
+          mkdir -p Payload
+          cp -r build/App.xcarchive/Products/Applications/*.app Payload
+          zip -r app.ipa Payload
+          rm -rf Payload
+
+      - name: Upload Debug Artifact
+        if: ${{ inputs.configuration == 'Debug' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-debug-build
+          path: ios/build/App.xcarchive
+
+      - name: Upload Release Artifact
+        if: ${{ inputs.configuration == 'Release' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-release-build
+          path: ios/app.ipa
+
+  build-macos:
+    name: Build macOS App
+    if: ${{ inputs.target-platform == 'macos' || inputs.target-platform == 'all' }}
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+          ruby-version: '3.0'
+          working-directory: 'macos'
+
+      - name: Install dependencies
+        run: |
+          yarn install --frozen-lockfile
+          cd macos && pod install
+
+      - name: Build macOS app
+        env:
+          CONFIGURATION: ${{ inputs.configuration }}
+        run: |
+          cd macos
+          xcodebuild -workspace $(ls -d *.xcworkspace | head -1) \
+                    -scheme $(ls -d *.xcodeproj | head -1 | sed 's/\.xcodeproj//') \
+                    -configuration $CONFIGURATION \
+                    -destination "platform=macOS" \
+                    -archivePath build/App.xcarchive \
+                    clean archive
+
+      - name: Export macOS app
+        env:
+          CONFIGURATION: ${{ inputs.configuration }}
+        run: |
+          cd macos
+          mkdir -p build/output
+          cp -r build/App.xcarchive/Products/Applications/*.app build/output/
+
+      - name: Upload macOS Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: macos-${{ inputs.configuration }}-build
+          path: macos/build/output
