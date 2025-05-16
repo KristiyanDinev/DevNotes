@@ -39,3 +39,10 @@ Can you register the **Utility** class as a **Service** class? Yes you can, but 
 **8. /Config**
 
 - In a web server or web API project. You may find yourself using the same algorithm or function over and over again. Whether it be in different classes or controllers etc. You are using it. If that function is only for database stuff, then you can put it in **Services**, or if it handles the requests, you can put it in **Utilities**. Remember to keep your file names good, for readable and cleaner code.
+
+## Data Structure
+
+If you have nested variable with these types: `List`, `Hash`, `Array`, `Dictionary`, `Map` etc.
+
+Then consider creating a class to minimize the confusion for the other developers.
+
