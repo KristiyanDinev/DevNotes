@@ -28,12 +28,22 @@ Basically **EF Core** is the newer version and **EF6** is the older.
 
 **User Model**
 
+*Note: ***{ get; set; }*** is making automatic getters and settings for that property.*
+
+```csharp
+User user = new User();
+user.Name = "Bob"; // setter
+Console.WriteLine(user.Name); // getter
+```
+
 Example:
 
 ```csharp
 namespace Project.Models {
     public class User {
         public int Id { get; set; }
+
+        public string Name { get; set; }
 
         // ... the rest of the properties.
 
@@ -352,6 +362,154 @@ Verify
 dotnet ef
 ```
 
-
 *See https://learn.microsoft.com/en-us/ef/core/cli/dotnet*
 
+## Queries
+
+Now let's see how to run queries.
+
+>*Note: We have not configured the table in EF Core, so it should use the model name for table name by default.*
+
+### Select
+
+**FirstOrDefaultAsync**
+
+Example:
+
+SQL
+
+```sql
+SELECT * FROM "User" AS u WHERE u."Name" = 'Bob' LIMIT 1;
+```
+
+EF Core
+
+```csharp
+// null if user doesn't exists.
+User? userBob = await _databaseContext.Users.FirstOrDefaultAsync(u => u.Name.Equals("Bob"));
+```
+
+**Where**
+
+SQL
+
+```sql
+SELECT * FROM "User" AS u WHERE u."Name" = 'Bob';
+```
+
+EF Core
+
+```csharp
+List<User> users = await _databaseContext.Users.Where(u => u.Name.Equals("Bob")).ToListAsync();
+```
+
+**Select**
+
+SQL
+
+```sql
+SELECT "Name" FROM "User" AS u WHERE u."Name" = 'Bob' LIMIT 1;
+```
+
+EF Core
+
+```csharp
+string? userBob = await _databaseContext.Users
+.Select(u => u.Name)
+.FirstOrDefaultAsync(name => name.Equals("Bob"));
+```
+
+**Select Many**
+
+*Select Many* is used when you want to get a collection of models.
+
+EF Core
+
+```csharp
+List<UserRole> userRoles = await _databaseContext.Users
+.SelectMany(u => u.UserRoles)
+.Where(userRole => userRole.UserId == 1)
+.ToListAsync();
+```
+
+**Add**
+
+Example:
+
+SQL
+
+```sql
+INSERT INTO "User" (...) VALUES (...);
+```
+
+EF Core
+
+```csharp
+User user = new User() {
+    ...
+};
+await _databaseContext.Users.AddAsync(user);
+```
+
+**Update**
+
+>*Note: EF Core only deletes and updates entities/objects when they are tracked by EF Core, so that is why you need to get the object first from the EF Core and then **update** it or **delete** it.*
+
+SQL
+
+```sql
+UPDATE "User" AS u SET u... = ... WHERE u."Id" = ...;
+```
+
+EF Core
+
+```csharp
+User? user = await _databaseContext.Users
+.FirstOrDefaultAsync(u => u.Name.Equals("Bob"));
+
+// assert that user is not null.
+user.Name = "John";
+
+int numberOfChangesRows = await _databaseContext.SaveChangesAsync();
+```
+
+**Delete**
+
+>*Note: Look at ***Update*** notes.*
+
+SQL
+
+```sql
+DELETE FROM "User" AS u WHERE u....;
+```
+
+EF Core
+
+```csharp
+User? user = await _databaseContext.Users
+.FirstOrDefaultAsync(u => u.Name.Equals("Bob"));
+
+// assert that user is not null.
+await _databaseContext.Users.Remove(user);
+
+// Or you can delete multiple object at once
+await _databaseContext.Users.RemoveRange(user, user1, user2);
+```
+
+### Include
+
+This will get the additional **one-to-many** relationship.
+
+```csharp
+User? userBob = await _databaseContext.Users
+.Include(user => user.UserRoles)
+.FirstOrDefaultAsync(user => user.Name.Equals("Bob"));
+```
+
+### SaveChanges
+
+This will **save all the changes** that you have done in the database.
+
+```csharp
+int numberOfChangesRows = await _databaseContext.SaveChangesAsync();
+```
