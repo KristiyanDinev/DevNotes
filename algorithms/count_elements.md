@@ -15,7 +15,9 @@ Go for each number in that list and check if it is the number you are looking fo
 
 *Boring*
 
-```c#
+Example:
+
+```csharp
 List<int> numbers = new List<int>();
 numbers.Add(1);
 numbers.Add(2);
@@ -37,7 +39,9 @@ First we get how many elements are in the list `5`, then we get that count, befo
 
 `5 - 3 = 2` basically we see how much we have removed from the list, when we removed the number we needed.
 
-```c#
+Example:
+
+```csharp
 List<int> numbers = new List<int>();
 numbers.Add(1);
 numbers.Add(2);
@@ -55,7 +59,9 @@ int count = length_before_removal - numbers.Count;
 
 What if you don't know how many elements are in the list and you want to count them all?
 
-```c#
+Example:
+
+```csharp
 List<int> numbers = new List<int>();
 numbers.Add(1);
 numbers.Add(2);

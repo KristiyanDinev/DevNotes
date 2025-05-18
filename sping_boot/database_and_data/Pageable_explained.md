@@ -9,7 +9,10 @@ Pageable is an interface and there are classes which represent Pageable in diffe
 
 For example the class `PageRequest` is a simple class which handles pages and their content very reasonable. But the rest may be used for some specific cases in your application.
 
-The JSON output of a Pageable looks something like this:
+The JSON output of a Pageable looks something like this.
+
+Example:
+
 ```json
 {
   "content": [
@@ -62,6 +65,9 @@ By default Spring Boot should use Pageable, but you may run into so issues at fi
 ## Snippets
 
 Here is a snippet for controller that uses Pageable.
+
+Example:
+
 ```java
 @RestController
 @EnableWebMvc
@@ -79,11 +85,17 @@ public class UserController {
 
 
 The simplest way to create sorted pages.
+
+Example:
+
 ```java
 Pageable pageable = PageRequest.of(sizePerPage, pageNumber, Sort.by(sortRepresentedByString));
 ```
 
 The simplest way to create unsorted pages.
+
+Example:
+
 ```java
 Pageable pageable = PageRequest.of(sizePerPage, pageNumber);
 ```

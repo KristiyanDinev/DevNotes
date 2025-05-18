@@ -19,6 +19,7 @@ What you can do is: commits, rollbacks, save-points, cancel and etc.
  to the real database. Then the transaction will be emptied.
 
 - **Rollback** is the action of undoing the sql queries in the transaction (not yet saved).
+
 - **Save Points** create a checkpoint in your transaction as your current state of the transaction.
 Let me give you an example:
 

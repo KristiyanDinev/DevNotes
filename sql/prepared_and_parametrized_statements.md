@@ -55,7 +55,7 @@ pstmt.executeUpdate();
 
 <a href="https://en.wikipedia.org/wiki/Prepared_statement">Wiki</a>
 
->In database management systems (DBMS), a prepared statement, parameterized statement, 
+>In database management systems **(DBMS)**, a prepared statement, parameterized statement, 
 >(not to be confused with parameterized query) is a feature where the database pre-compiles 
 >SQL code and stores the results, separating it from data.
 

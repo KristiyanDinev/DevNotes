@@ -11,8 +11,8 @@ the opposite of **stateless**. It is the condition of holding and keeping track 
 
 Example:
 
-Stateful:
-```c#
+Stateful
+```csharp
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 
@@ -40,7 +40,7 @@ public class StatefulController : ControllerBase
 ```
 
 Stateless
-```c#
+```csharp
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
@@ -73,8 +73,8 @@ public class StatelessController : ControllerBase
 }
 ```
 
-**Important!**
-
+>**Important!**
+>
 >**Stateful** doesn't always mean it is stored in memory.
 Look at the **cookies**. They hold a **state**, but without the **cookies**, managing/holding a **state** will be a bit more difficult.
 
@@ -88,7 +88,9 @@ Doesn't require a whole class to register an endpoint, but it can't use **Views 
 
 You have to return **IResult**.
 
-```c#
+Example:
+
+```csharp
 app.MapGet("/names/{name}", (string name, DatabaseContext db) =>
 {
     var result = db.Names.FirstOrDefault(n => n == name);
@@ -130,7 +132,9 @@ Use it when things are simple and you don't need a lot of customs and features a
 
 *Note: You can put whatever **annotations** you want on top of the controller, so you won't have to put them for every **endpoint** in that **controller**.*
 
-```c#
+Example:
+
+```csharp
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.RateLimiting;
 
