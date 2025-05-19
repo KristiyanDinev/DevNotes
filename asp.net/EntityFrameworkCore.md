@@ -1,6 +1,6 @@
 # Entity Framework Core (EF Core)
 
-Manages the database with **entities**, which are *C# classes*, which represent a *tables* in the database. Supports all **CRUD** operations.
+Manages the database with **entities**, which are *C# classes*, which represent *tables* in the database. Supports all **CRUD** operations.
 
 **Entity Framework Core** takes care of the correct *sql syntax and query* and you just take care of *implementing* it.
 Don't worry. You still can execute plain **SQL queries**.
@@ -53,6 +53,7 @@ namespace Project.Models {
         public int CompanyId { get; set; }
         public Company Company { get; set; } = null!;
 
+        // Navigation property
         public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }
@@ -69,7 +70,7 @@ namespace Project.Models {
 
         // ... the rest of the properties.
 
-        // navigation property
+        // Navigation property
         public ICollection<User> Users { get; set; } = new List<User>();
     }
 }
@@ -103,7 +104,7 @@ namespace Project.Models {
 
         // ... the rest of the properties.
 
-        // navigation property
+        // Navigation property
         public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     }
 }
@@ -182,7 +183,10 @@ namespace Project {
 
                 */
 
-                options.UseNpgsql(builder.Configuration.GetValue<string>("ConnectionString"));
+                options.UseNpgsql(
+                    builder.Configuration
+                    .GetValue<string>("ConnectionString")
+                );
             });
         }
     }
@@ -279,6 +283,8 @@ You need a **third model** to represent the **many-to-many** relationship.
 
 In this example **UserRole** is the model, which represents the **third model**.
 
+>*Note: Make sure that you will provide a primary key ***(Id)***, because otherwise `dotnet ef migrations add ...` will not work.*
+
 **Fluent API**
 ```csharp
 builder.Entity<UserRole>()
@@ -305,7 +311,7 @@ public class User
     [Key]
     public int Id { get; set; }
 
-    // navigation property
+    // Navigation property
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }
 
@@ -314,7 +320,7 @@ public class Role
     [Key]
     public int Id { get; set; }
 
-    // navigation property
+    // Navigation property
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
 }
 
@@ -386,7 +392,8 @@ EF Core
 
 ```csharp
 // null if user doesn't exists.
-User? userBob = await _databaseContext.Users.FirstOrDefaultAsync(u => u.Name.Equals("Bob"));
+User? userBob = await _databaseContext.Users
+.FirstOrDefaultAsync(u => u.Name.Equals("Bob"));
 ```
 
 **Where**
@@ -400,7 +407,9 @@ SELECT * FROM "User" AS u WHERE u."Name" = 'Bob';
 EF Core
 
 ```csharp
-List<User> users = await _databaseContext.Users.Where(u => u.Name.Equals("Bob")).ToListAsync();
+List<User> users = await _databaseContext.Users
+.Where(u => u.Name.Equals("Bob"))
+.ToListAsync();
 ```
 
 **Select**
@@ -470,7 +479,8 @@ User? user = await _databaseContext.Users
 // assert that user is not null.
 user.Name = "John";
 
-int numberOfChangesRows = await _databaseContext.SaveChangesAsync();
+int numberOfChangesRows = await _databaseContext
+.SaveChangesAsync();
 ```
 
 **Delete**
@@ -490,10 +500,12 @@ User? user = await _databaseContext.Users
 .FirstOrDefaultAsync(u => u.Name.Equals("Bob"));
 
 // assert that user is not null.
-await _databaseContext.Users.Remove(user);
+await _databaseContext.Users
+.Remove(user);
 
 // Or you can delete multiple object at once
-await _databaseContext.Users.RemoveRange(user, user1, user2);
+await _databaseContext.Users
+.RemoveRange(user, user1, user2);
 ```
 
 ### Include
@@ -511,5 +523,6 @@ User? userBob = await _databaseContext.Users
 This will **save all the changes** that you have done in the database.
 
 ```csharp
-int numberOfChangesRows = await _databaseContext.SaveChangesAsync();
+int numberOfChangesRows = await _databaseContext
+.SaveChangesAsync();
 ```
