@@ -11,6 +11,5 @@
 *Also applies to Tomcat JDBC connection pool*
 - https://commons.apache.org/proper/commons-dbcp/configuration.html
 
-
 ### Nuget Packages
 - https://www.nuget.org/PACKAGES
