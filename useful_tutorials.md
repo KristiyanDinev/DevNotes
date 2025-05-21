@@ -13,3 +13,6 @@
 ### Super In-depth cover topics
 - https://www.deepintodev.com/
 
+### Caching
+- https://www.youtube.com/watch?v=bP4BeUjNkXc
+
