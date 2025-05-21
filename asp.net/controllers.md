@@ -2,16 +2,19 @@
 
 This is part of the **MVC** (Model View Controller).
 The controller is like a middleman between the database and the client.
-Every controller should be stateless. **Stateless** is the condition of not keeping a state or not keeping track of anything in memory **(RAM)**. The **database** is the one, which keeps the data/state/track of things.
+Every controller should be **stateless**.
 
 ## Stateful VS Stateless
+
+**Stateless** is the condition of not keeping a state or not keeping track of anything in memory **(RAM)**. 
+The **database** is the one, which keeps the data/state/track of things.
 
 **Stateful** is
 the opposite of **stateless**. It is the condition of holding and keeping track of data in memory **(RAM)**.
 
 Example:
 
-Stateful
+**Stateful**
 ```csharp
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
@@ -39,13 +42,13 @@ public class StatefulController : ControllerBase
 }
 ```
 
-Stateless
+**Stateless**
 ```csharp
 using Microsoft.AspNetCore.Mvc;
 
 [ApiController]
 [Route("[controller]")]
-public class StatelessController : ControllerBase
+public class StatelessController : Controller
 {
     private readonly DatabaseContext _db;
 
@@ -221,3 +224,19 @@ Here you can use **RazorPages** and **Views**.
 - **[RequestFormLimits(...)]** - Sets **custom Form Limitations** like **Keys**, **Values**, **Body Size**, **Count** etc.
 
 - **[Consumes("content type", "additional content type")]** - Accepts such *content types* of that *endpoint*. It helps with **OpenAPI/Swagger documentation** generation.
+
+## Redirection
+
+Redirect only for **GET** request, otherwise the header **Location**, which is sent by the server will have no effect and it will return a status code of **200** if the redirection was successful, but you don't need that and this will only confuse the developers.
+
+Let the **JS (JavaScript)** or the client side take care of all the redirection.
+
+**POST**, **PATCH**, **DELETE** etc. should be **stateless**. This is why we return a status code and not a redirection.
+
+### Class Controllers (returns IActionResult)
+
+You can return **Ok()** or **BadRequest()**.
+
+### Minimal API (returns IResult)
+
+You can return **Results.Ok()** or **Results.BadRequest()**.
