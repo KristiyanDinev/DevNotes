@@ -14,7 +14,7 @@ In order to **prevent** these things in **large companies**, they use **caching*
 
 A server can store their **cache** in **RAM** and use it in **runtime**, but once the **server** is **restarted** that **cache** is gone.
 
->*Notes: See [Cluster](/system_design/cluster.md)*
+>*Notes: See [Cluster](/DevNotes/system_design/cluster)*
 
 You can use a **cluster** *(multitudes of servers)* to keep the **cache** on **multiple servers** in case one of them **shuts down**. 
 But in order to keep **all servers updated**  with their **cache** this means that every time the **cache is updated or cleared**, then all the **servers** must **sync**. This is the only **drawback** and it may get a **bit expensive**, but not too much, so it will not profit the company.
