@@ -16,3 +16,5 @@
 ### Caching
 - https://www.youtube.com/watch?v=bP4BeUjNkXc
 
+### Load balancing
+- https://www.youtube.com/watch?v=xg7Dj2AXLyk

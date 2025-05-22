@@ -3,6 +3,8 @@
 The database management system (DBMS) can use prepared statements and
 parameterized statements.
 
+<img src="../images/google_search_sql.png">
+
 ## Prepared
 When an SQL query is executed it goes through the DBMS. That system breaks the
 query down to smaller parts and understands what it is trying to do.
