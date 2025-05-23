@@ -2,8 +2,7 @@
 
 Manages the database with **entities**, which are *C# classes*, which represent *tables* in the database. Supports all **CRUD** operations.
 
-**Entity Framework Core** takes care of the correct *sql syntax and query* and you just take care of *implementing* it.
-Don't worry. You still can execute plain **SQL queries**.
+**Entity Framework Core** takes care of the correct *sql syntax and query* and you just take care of *implementing* it. Don't worry. You can still execute plain **SQL queries**. 
 
 If you come from *Java*, then the best way to explain it is: **JPA**.
 
@@ -11,7 +10,7 @@ If you come from *Java*, then the best way to explain it is: **JPA**.
 
 ## EF Core VS EF6
 
-Basically **EF Core** is the newer version and **EF6** is the older.
+Basically, **EF Core** is the newer version and **EF6** is the older.
 **EF Core** is recommended.
 
 *See https://learn.microsoft.com/en-us/ef/efcore-and-ef6/*
@@ -24,11 +23,13 @@ Basically **EF Core** is the newer version and **EF6** is the older.
 
 *See https://learn.microsoft.com/en-us/ef/core/modeling/relationships/one-to-many*
 
-- **Navigation property** is a property, which helps **Entity Framework Core** to build the correct relationship between the tables. It is not a column, but a relationship.
+- **Navigation property** is a property which helps **Entity Framework Core** to build the correct relationship between the tables. It is not a column, but a relationship.
 
 **User Model**
 
 *Note: ***{ get; set; }*** is making automatic getters and settings for that property.*
+
+Example:
 
 ```csharp
 User user = new User();
@@ -132,11 +133,11 @@ namespace Project.Models {
 
 ## Database Context
 
-The `DbContext` is the main class that manages your entities and database connection.
+The `DbContext` is the main class that manages your entities and database connections.
 
 You define your tables as `DbSet<T>` properties.
 
-*See dependency_injection.md in design_pattern*
+*See [Dependency Injection](../design_pattern/dependency_injection.md)*
 
 Example:
 
@@ -281,9 +282,9 @@ public class Company
 
 You need a **third model** to represent the **many-to-many** relationship.
 
-In this example **UserRole** is the model, which represents the **third model**.
+In this example, **UserRole** is the model which represents the **third model**.
 
->*Note: Make sure that you will provide a primary key ***(Id)***, because otherwise `dotnet ef migrations add ...` will not work.*
+>*Note: Make sure that you provide a primary key ***(I'd)***, because otherwise `dotnet ef migrations add ...` will not work.*
 
 **Fluent API**
 ```csharp
@@ -374,7 +375,7 @@ dotnet ef
 
 Now let's see how to run queries.
 
->*Note: We have not configured the table in EF Core, so it should use the model name for table name by default.*
+>*Note: We have not configured the table in EF Core, so it should use the model name for the table name by default.*
 
 ### Select
 
@@ -510,7 +511,7 @@ await _databaseContext.Users
 
 ### Include
 
-This will get the additional **one-to-many** relationship.
+This will get an additional **one-to-many** relationship.
 
 ```csharp
 User? userBob = await _databaseContext.Users
@@ -520,7 +521,7 @@ User? userBob = await _databaseContext.Users
 
 ### SaveChanges
 
-This will **save all the changes** that you have done in the database.
+This will **save all the changes** that you have made in the database.
 
 ```csharp
 int numberOfChangesRows = await _databaseContext

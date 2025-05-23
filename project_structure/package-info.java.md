@@ -27,7 +27,6 @@ import org.springframework.lang.NonNullFields;
 ```
 
 Here in the `/* */` comments you can write out the **Javadoc**.
-
 You can continue with **annotations** that apply to the classes in that single package.
 
 The imports are for the **annotations'** sake.

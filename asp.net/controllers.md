@@ -6,11 +6,9 @@ Every controller should be **stateless**.
 
 ## Stateful VS Stateless
 
-**Stateless** is the condition of not keeping a state or not keeping track of anything in memory **(RAM)**. 
-The **database** is the one, which keeps the data/state/track of things.
+**Stateless** is the condition of not keeping a state or not keeping track of anything in memory **(RAM)**. The **database** is the one which keeps the *data/state/track* of things.
 
-**Stateful** is
-the opposite of **stateless**. It is the condition of holding and keeping track of data in memory **(RAM)**.
+**Stateful** is the opposite of **stateless**. It is the condition of holding and keeping track of data in memory **(RAM)**.
 
 Example:
 
@@ -78,16 +76,16 @@ public class StatelessController : Controller
 
 >**Important!**
 >
->**Stateful** doesn't always mean it is stored in memory.
+>**Stateful** doesn't always mean it is stored in memory. 
 Look at the **cookies**. They hold a **state**, but without the **cookies**, managing/holding a **state** will be a bit more difficult.
 
 **Why the controller should be stateless?**
 
-Because the controller acts as an anonymous middleman. If you need to scale and add more machines to run your web server, then guess what. These two or **more machines**, which run your server will have different data in them, because they each will use their **own memory** to store and keep track of data. This is why they should use one database, so the data they work with may be the same to every server. This also applies to **configuration** *(**Kubernetes** or **Docker Swarm**)* and **cache**.
+Because the controller acts as an anonymous middleman. If you need to scale and add more machines to run your web server, then guess what. These two or **more machines** which run your server will have different data in them, because they will each use their **own memory** to store and keep track of data. This is why they should use one database, so the data they work with may be the same to every server. This also applies to **configuration** *(**Kubernetes** or **Docker Swarm**)* and **cache**.
 
 ## Minimal API
 
-Doesn't require a whole class to register an endpoint, but it can't use **Views *(return View("ViewName", Model))*** or **RazorPages**, but it can render a normal **HTML** website and return status codes.
+It doesn't require a whole class to register an endpoint, but it can't use **Views *(return View("ViewName", Model))*** or **RazorPages**, but it can render a normal **HTML** website and return status codes.
 
 You have to return **IResult**.
 
@@ -111,7 +109,7 @@ app.MapPost("/names/{name}", (string name, DatabaseContext db) =>
 });
 ```
 
-Use it when things are simple and you don't need a lot of customs and features and also want to keep stuff nice and clean.
+Use it when things are simple, and you don't need a lot of features and also want to keep stuff nice and clean.
 
 ### Settings
 
@@ -129,7 +127,7 @@ Use it when things are simple and you don't need a lot of customs and features a
 
 - **.RequireCors(...)** - **Enables** *CORS (Cross-Origin Resource Sharing)* with that policy.
 
-- **.RequireHost(...)** - *Limits* the allowed hosts, which can *access* the endpoint.
+- **.RequireHost(...)** - **Limits** the allowed hosts, which can *access* the endpoint.
 
 ## Class Controller
 
@@ -185,7 +183,7 @@ namespace Project.Controllers {
 }
 ```
 
-As you see you have to return **IActionResult** and not **IResult**.
+As you see, you have to return **IActionResult** and not **IResult**. 
 
 Here you can use **RazorPages** and **Views**.
 
@@ -209,7 +207,7 @@ Here you can use **RazorPages** and **Views**.
 
 - **[DisableRequestSizeLimit]** - **Disables** the limitation of the **body size**.
 
-- **[RequestSizeLimit(1234)]** - Sets **body limit** to the given **size in long**. See *int* and *long* datatypes.
+- **[RequestSizeLimit(1234)]** - Sets **body limit** to the given **size in long**. See *int* and *long* data types.
 
 - **[EnableCors]** - **Enables** *CORS (Cross-Origin Resource Sharing)* with default policy **__DefaultCorsPolicy**.
 
@@ -227,7 +225,7 @@ Here you can use **RazorPages** and **Views**.
 
 ## Redirection
 
-Redirect only for **GET** request, otherwise the header **Location**, which is sent by the server will have no effect and it will return a status code of **200** if the redirection was successful, but you don't need that and this will only confuse the developers.
+Redirect only for the **GET** request, otherwise the header **Location**, which is sent by the server, will have no effect, and it will return a status code of **200** if the redirection was successful, but you don't need that and this will only confuse the developers.
 
 Let the **JS (JavaScript)** or the client side take care of all the redirection.
 
