@@ -3,6 +3,15 @@
 Get one element of the **list** and compare it to the **left** and to the **right**.
 We start with the **second** element *(index=1)*, because the **first** element *(index=0)* is considered **sorted** at the start.
 
+## Time Complexity:
+
+- Best case *(already sorted)*: $$O(n)$$
+
+- Average and Worst case: $$O(n^2)$$
+
+- Space Complexity *(in-place)*: $$O(1)$$
+
+
 **List:** `[5, 2, 4, 1]`
 
 1. So we get `2`.
