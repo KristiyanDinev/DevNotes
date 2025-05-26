@@ -11,6 +11,7 @@ We start with the **second** element *(index=1)*, because the **first** element 
 
 - Space Complexity *(in-place)*: $$O(1)$$
 
+---
 
 **List:** `[5, 2, 4, 1]`
 
@@ -51,6 +52,8 @@ The goal here is to **insert** `last_num` into its place in the *array*. As it i
 This **loop** is done in *reverse*, so you may try to think in a *different* way.
 
 ## Solution
+
+**Java**
 
 ```java
 public static void insertionSort1(int n, List<Integer> arr) {

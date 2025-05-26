@@ -1,17 +1,17 @@
 # Counting how many specific elements are in a list
 
-For example we have a list of numbers, which can be repeated.
+For example we have a **list** of numbers, which can be repeated.
 ```c#
 List<int> numbers = new List<int>();
 ```
 
-And we want to count how many `2` we have in the list.
+And we want to **count** how many `2` we have in the **list**.
 
 # Solutions
 
 ## For loop
 
-Go for each number in that list and check if it is the number you are looking for, then increase the counter.
+Go for each **number** in that **list** and check if it is the **number** you are looking for, then **increase** the counter.
 
 *Boring*
 
@@ -35,9 +35,9 @@ foreach (int number in numbers) {
 
 ## Remove
 
-First we get how many elements are in the list `5`, then we get that count, before we remove the numbers, then we remove the number we want to count, and then only the rest of the numbers remain `3`. 
+First we find out how many **elements** are in the list `5`, then we get that **count**, before we remove the **numbers**, then we remove the number we want to **count**, and then only the rest of the **numbers** remain `3`. 
 
-`5 - 3 = 2` basically we see how much we have removed from the list, when we removed the number we needed.
+`5 – 3 = 2` basically, we see how much we have **removed** from the **list** when we remove the **number** we needed.
 
 Example:
 
@@ -57,7 +57,7 @@ numbers.RemoveAll(num => num == 2);
 int count = length_before_removal - numbers.Count;
 ```
 
-What if you don't know how many elements are in the list and you want to count them all?
+What if you don't know how many *elements* you want to **count**?
 
 Example:
 
