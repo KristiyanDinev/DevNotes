@@ -32,8 +32,6 @@ public interface Animal {
 * **No body:** Abstract methods **do not have a body** *(up to Java 7).*
 * **Public & abstract by default:** No need to declare them with these modifiers explicitly.
 
----
-
 ## Default and Static Methods
 
 Since **Java 8**, interfaces can have **methods** with a body.
@@ -59,8 +57,6 @@ static void greet() {
     System.out.println("Hello!");
 }
 ```
-
----
 
 ## Key Differences
 
