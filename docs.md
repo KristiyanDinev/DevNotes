@@ -13,3 +13,6 @@
 
 ### Nuget Packages
 - https://www.nuget.org/PACKAGES
+
+### Discord's timestamp message format
+- https://gist.github.com/LeviSnoot/d9147767abeef2f770e9ddcd91eb85aa
