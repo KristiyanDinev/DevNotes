@@ -46,7 +46,35 @@ Yes you can, but please make sure that you keep the **Single Responsibility** pr
 
 ## Data Structure
 
-If you have nested variable with these types: `List`, `Hash`, `Array`, `Dictionary`, `Map` etc.
+If you have **nested** variables with these types: `List`, `Hash`, `Array`, `Dictionary`, `Map` etc. 
 
-Then consider creating a **class** to minimize confusion for the other developers.
+Then consider creating a **class** to minimize confusion for other developers.
 
+Example:
+
+**Java**
+```java
+// key: int user id, value: list of usernames
+Map<Integer, List<String>> users = new Map<Integer, List<String>>();
+```
+
+To
+
+```java
+public class Users {
+    public int id;
+    public List<String> names;
+    // ...
+}
+```
+
+## File Paths
+
+- `/folder` - **Absolute Path** *(basically the full/whole path for that folder starting from the ***root***).*
+
+- `folder/` - **Relative Path** *(adds to your ***current*** path).*
+
+### Web Urls
+
+- `https://example.com/folder` - Could be a *file* or (directory)
+- `https://example.com/folder/` - Definitely a *directory*, will show index page
