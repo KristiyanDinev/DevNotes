@@ -238,3 +238,32 @@ You can return **Ok()** or **BadRequest()**.
 ### Minimal API (returns IResult)
 
 You can return **Results.Ok()** or **Results.BadRequest()**.
+
+## Form Submission
+
+```js
+formData.append("Username", '')
+```
+
+will give `null`. And
+
+```js
+formData.append("Username", null)
+```
+
+will give `"null"`.
+
+
+**Please check if you have put the keyword required or you have used string? in your model.**
+
+**Nullable** string. It can be `null` or it can have a *valid string*.
+
+```csharp
+public string? Username { get; set; }
+```
+
+**Can NOT** be `null`, but always a *valid string*.
+
+```csharp
+public required string Username { get; set; }
+```
