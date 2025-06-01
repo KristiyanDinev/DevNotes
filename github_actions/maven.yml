@@ -6,6 +6,9 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
+# Don't exclude the mvnw and maven-wrapper.jar file, it is needed to run the build
+# Generate them with `mvn wrapper:wrapper` if they are not present
+
 name: Java CI with Maven
 
 on:
@@ -24,12 +27,14 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
-        cache: maven
+
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@1
 
     - name: Build with Maven
       run: |
           chmod +x *
-          mvn -B clean package --file pom.xml
+          ./mvnw -B clean package --file pom.xml
 
     - name: Upload jar
       uses: actions/upload-artifact@v4
