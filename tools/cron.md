@@ -16,13 +16,15 @@ You cannot use **seconds** and **years** in standard Linux **cron** *(via cronta
 
 - `/` *(Slash):* Specifies **increments** by adding **num1 + num2**. Example: `0 5/1 * ? * * *`. This will run from the **fifth** minute to the **59th** in that hour. Like **6**, **6**, **7**, **8** to **59** *included*.
 
-## Quartz-style (library) CRON
+## Quartz scheduler (library) CRON
 
 It follows this **pattern**:
 
 ```sql
 <second> <minute> <hour> <day-of-month> <month> <day-of-week> <year>
 ```
+
+*See https://www.quartz-scheduler.org/*
 
 ## Linux CRON
 
@@ -54,14 +56,62 @@ sudo pacman -S cronie
 
 ### Enable CRON Service
 
+>*Note: On Red Hat-based systems, the service might be named `crond` instead of `cron`:*
+
+**Using `Systemctl` for services**
+
+*(Interacts with `systemd`)*
+
 ```bash
 sudo systemctl enable cron
 sudo systemctl start cron
 ```
 
->*Note: On Red Hat-based systems, the service might be named `crond` instead of `cron`:*
+**Using `service` for services**
 
 ```bash
-sudo systemctl enable crond
-sudo systemctl start crond
+sudo service start cron
 ```
+
+### Usage
+
+- **Open your crontab:**
+
+    ```bash
+    crontab -e [username (option)]
+    ```
+
+Install any text **editor** and execute `crontab -e`. This will open a text **file**.
+
+In that text **file**, specify all the **cron** jobs you want to run.
+
+<img src="../images/cron.png">
+
+This will run the command `echo Hello` at **second 0** on the **2nd hour** *(2 AM)*, every **day**, every **month**.
+
+- **List current user's cron jobs:**
+
+    ```bash
+    crontab -l
+    ```
+
+- **Remove current user's cron jobs:**
+
+    ```bash
+    crontab -r
+    ```
+
+You can view the **logs** of the **cron** job in the `/var/log/...` folder.
+
+## Windows Server
+
+*See https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/schtasks*
+
+## Windows 10/11
+
+**Start** -> **Control Panel** -> **System and Security** -> **Administrative Tools** -> **Task Scheduler**
+
+## Python
+
+*See https://pypi.org/project/python-crontab/*
+
