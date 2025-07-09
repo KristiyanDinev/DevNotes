@@ -18,3 +18,6 @@
 
 ### Load balancing
 - https://www.youtube.com/watch?v=xg7Dj2AXLyk
+
+### Dependabot
+- https://docs.github.com/en/code-security/dependabot/working-with-dependabot/dependabot-options-reference
