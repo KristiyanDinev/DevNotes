@@ -5,11 +5,15 @@ services:
     command: hbbs
     volumes:
       - ./data:/root
-    network_mode: "host"
+    # network_mode: "host"  uncomment for linux
 
     depends_on:
       - hbbr
     restart: unless-stopped
+    ports:
+      - "21115:21115/tcp"
+      - "21116:21116/tcp"
+      - "21116:21116/udp"
 
   hbbr:
     container_name: hbbr
@@ -17,5 +21,7 @@ services:
     command: hbbr
     volumes:
       - ./data:/root
-    network_mode: "host"
+    # network_mode: "host"  uncomment for linux
     restart: unless-stopped
+    ports:
+      - "21117:21117/tcp"
